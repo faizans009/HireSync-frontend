@@ -109,19 +109,6 @@ p {
   flex-direction: column;
   gap: 20px;
 }
-.authPage .container form .otpInput{
-  display: flex;
-  justify-content: center;
-}
-.authPage .container form .otpInput input{
-  width: 3rem !important;
-  text-align: center;
-  height: 3rem !important;
-  margin: 0 .5rem;
-  font-size: 1.3rem;
-}
-
-
 .authPage .container form .inputTag {
   display: flex;
   flex-direction: column;
@@ -163,24 +150,11 @@ p {
   font-size: 1.2rem;
   border-radius: 7px;
 }
-.authPage .container form #forget a{
-  border: none ;
-  margin: 0;
-  padding: 0;
-  font-weight: 500;
-  font-size: 1rem;
-  
-}
-.authPage .container form #forget{
-  padding: 0;
-  display: flex;
-  justify-content: end;
-}
 .authPage .container form a {
   padding: 12px;
   text-align: center;
   border: 1px solid #2d5649;
-  /* margin-top: 25px; */
+  margin-top: 25px;
   font-weight: 700;
   color: #2d5649;
   font-size: 1.2rem;

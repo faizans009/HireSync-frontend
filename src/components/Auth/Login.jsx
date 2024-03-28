@@ -1,4 +1,4 @@
-import  { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { RiLock2Fill } from "react-icons/ri";
 import { Link, Navigate } from "react-router-dom";
@@ -27,18 +27,22 @@ const Login = () => {
           withCredentials: true,
         }
       );
+      console.log(data);
+      // localStorage.setItem(JSON.stringify("user", data));
+      localStorage.setItem("user", JSON.stringify(data.user));
       toast.success(data.message);
       setEmail("");
       setPassword("");
       setRole("");
       setIsAuthorized(true);
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.log(error);
+      toast.error(error);
     }
   };
 
-  if(isAuthorized){
-    return <Navigate to={'/'}/>
+  if (isAuthorized) {
+    return <Navigate to={"/"} />;
   }
 
   return (
@@ -85,13 +89,9 @@ const Login = () => {
                 <RiLock2Fill />
               </div>
             </div>
-            
             <button type="submit" onClick={handleLogin}>
               Login
             </button>
-            <div className="forget" id="forget">
-          <Link to={"/ForgetPassword"}>Forget Password?</Link>
-        </div>
             <Link to={"/register"}>Register Now</Link>
           </form>
         </div>

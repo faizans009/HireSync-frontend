@@ -1,10 +1,9 @@
-import  { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import "./App.css";
 import { Context } from "./main";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
-import ForgetPassword from "./components/Auth/ForgetPassword";
 import { Toaster } from "react-hot-toast";
 import axios from "axios";
 import Navbar from "./components/Layout/Navbar";
@@ -17,8 +16,9 @@ import MyApplications from "./components/Application/MyApplications";
 import PostJob from "./components/Job/PostJob";
 import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
-import OtpVerify from "./components/Auth/OtpVerify";
-import ChangePassword from "./components/Auth/ChangePassword";
+// import chat from "../src/chat/pages/Chat.jsx";
+import Chat from "../src/chat/pages/Chat.jsx";
+import SetAvatar from "./chat/components/SetAvatar.jsx";
 
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
@@ -31,8 +31,11 @@ const App = () => {
             withCredentials: true,
           }
         );
+
         setUser(response.data.user);
+        // localStorage.setItem(JSON.stringify("user", response.data.user));
         setIsAuthorized(true);
+        // localStorage.setItem(JSON.stringify("user", response.data.user));
       } catch (error) {
         setIsAuthorized(false);
       }
@@ -45,11 +48,10 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path="/setAvatar" element={<SetAvatar />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/ForgetPassword" element={<ForgetPassword />} />
-          <Route path="/OtpVerify" element={<OtpVerify />} />
-          <Route path="/ChangePassword" element={<ChangePassword />} />
           <Route path="/" element={<Home />} />
           <Route path="/job/getall" element={<Jobs />} />
           <Route path="/job/:id" element={<JobDetails />} />
@@ -59,7 +61,7 @@ const App = () => {
           <Route path="/job/me" element={<MyJobs />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
         <Toaster />
       </BrowserRouter>
     </>

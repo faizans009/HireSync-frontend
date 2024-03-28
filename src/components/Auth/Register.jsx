@@ -1,24 +1,22 @@
-import  { useState } from "react";
+import { useContext, useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { RiLock2Fill } from "react-icons/ri";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaPhoneFlip } from "react-icons/fa6";
-import { Link,  useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
 
 const Register = () => {
-  const navigate= useNavigate()
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
 
-  // localStorage.setItem('email', email),
-  // const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
+  const { isAuthorized, setIsAuthorized } = useContext(Context);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -33,26 +31,21 @@ const Register = () => {
           withCredentials: true,
         }
       );
-      localStorage.setItem('email', email),
-      console.log(data, 'data')
-      if(data.success){
-        navigate('/OtpVerify')
-      }
       toast.success(data.message);
       setName("");
       setEmail("");
       setPassword("");
       setPhone("");
       setRole("");
-      // setIsAuthorized(true);
+      setIsAuthorized(true);
     } catch (error) {
       toast.error(error.response.data.message);
     }
   };
 
-  // if(isAuthorized){
-  //   return <Navigate to={'/'}/>
-  // }
+  if(isAuthorized){
+    return <Navigate to={'/'}/>
+  }
 
 
   return (
@@ -80,7 +73,7 @@ const Register = () => {
               <div>
                 <input
                   type="text"
-                  placeholder="Name"
+                  placeholder="Zeeshan"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -92,7 +85,7 @@ const Register = () => {
               <div>
                 <input
                   type="email"
-                  placeholder="abc@gmail.com"
+                  placeholder="zk@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
