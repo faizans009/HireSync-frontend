@@ -1,16 +1,17 @@
+
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../main";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import ResumeModal from "./ResumeModal";
+import { sendMessageRoute } from "../../chat/utils/APIRoutes";
 
 const MyApplications = () => {
   const { user } = useContext(Context);
   const [applications, setApplications] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [resumeImageUrl, setResumeImageUrl] = useState("");
-
   const { isAuthorized } = useContext(Context);
   const navigateTo = useNavigate();
 
@@ -59,6 +60,20 @@ const MyApplications = () => {
     }
   };
 
+  const messageApplication = async (sender, receiver) => {
+    try {
+      await axios.post(sendMessageRoute, {
+        from: sender,
+        to: receiver,
+        message: "message sent",
+      });
+      toast.success("Message sent successfully");
+      navigateTo("/chat");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+  
   const openModal = (imageUrl) => {
     setResumeImageUrl(imageUrl);
     setModalOpen(true);
@@ -105,6 +120,7 @@ const MyApplications = () => {
                   element={element}
                   key={element._id}
                   openModal={openModal}
+                  messageApplication={messageApplication}
                 />
               );
             })
@@ -158,7 +174,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   );
 };
 
-const EmployerCard = ({ element, openModal }) => {
+const EmployerCard = ({ element, openModal, messageApplication }) => {
   return (
     <>
       <div className="job_seeker_card">
@@ -185,6 +201,11 @@ const EmployerCard = ({ element, openModal }) => {
             alt="resume"
             onClick={() => openModal(element.resume.url)}
           />
+        </div>
+        <div className="btn_area">
+          <button onClick={() => messageApplication(element.employerID.user, element.applicantID.user)}>
+            Message
+          </button>
         </div>
       </div>
     </>
