@@ -60,20 +60,28 @@ const MyApplications = () => {
     }
   };
 
-  const messageApplication = async (sender, receiver) => {
+  const messageApplication = async (sender, receiver, status,id) => {
     try {
-      await axios.post(sendMessageRoute, {
-        from: sender,
-        to: receiver,
-        message: "message sent",
-      });
-      toast.success("Message sent successfully");
+      if (!status) {
+        await axios.post(sendMessageRoute, {
+          from: sender,
+          to: receiver,
+          message: "We ar reviewing your application",
+        });
+        await axios.post(
+          `http://localhost:4000/api/v1/application/updateMessageStatus`,
+          {
+            id:id
+          }
+        )
+        toast.success("Message sent successfully");
+      }
       navigateTo("/chat");
     } catch (error) {
       toast.error(error.response.data.message);
     }
   };
-  
+
   const openModal = (imageUrl) => {
     setResumeImageUrl(imageUrl);
     setModalOpen(true);
@@ -203,7 +211,7 @@ const EmployerCard = ({ element, openModal, messageApplication }) => {
           />
         </div>
         <div className="btn_area">
-          <button onClick={() => messageApplication(element.employerID.user, element.applicantID.user)}>
+          <button onClick={() => messageApplication(element.employerID.user, element.applicantID.user, element.messageSent,element._id)}>
             Message
           </button>
         </div>

@@ -66,7 +66,11 @@ const Navbar = () => {
           ) : (
             <></>
           )}
-
+<li>
+                <Link to={"/chat"} onClick={() => setShow(false)}>
+                  Messages
+                </Link>
+              </li>
           <button onClick={handleLogout}>LOGOUT</button>
         </ul>
         <div className="hamburger">
