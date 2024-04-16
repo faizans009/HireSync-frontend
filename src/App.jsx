@@ -16,9 +16,9 @@ import MyApplications from "./components/Application/MyApplications";
 import PostJob from "./components/Job/PostJob";
 import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
-// import chat from "../src/chat/pages/Chat.jsx";
 import Chat from "../src/chat/pages/Chat.jsx";
 import SetAvatar from "./chat/components/SetAvatar.jsx";
+import CreateTest from '../src/components/Test/createTest.jsx';
 
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
@@ -59,6 +59,7 @@ const App = () => {
           <Route path="/applications/me" element={<MyApplications />} />
           <Route path="/job/post" element={<PostJob />} />
           <Route path="/job/me" element={<MyJobs />} />
+          <Route path="/createTest" element={<CreateTest />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {/* <Footer /> */}
