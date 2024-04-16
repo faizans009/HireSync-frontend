@@ -43,6 +43,7 @@ const MyApplications = () => {
     navigateTo("/");
   }
 
+  
   const deleteApplication = (id) => {
     try {
       axios
@@ -54,6 +55,23 @@ const MyApplications = () => {
           setApplications((prevApplication) =>
             prevApplication.filter((application) => application._id !== id)
           );
+        });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+  const GetTest = (id,applicationId) => {
+    try {
+      axios
+        .get(`http://localhost:4000/api/v1/test/getTest/${id}`, {
+         
+        })
+        .then((res) => {
+          localStorage.setItem("jobId",id)
+          localStorage.setItem("application",applicationId)
+          toast.success(res.data.message);
+          console.log(res.data)
+          navigateTo('/getTest')
         });
     } catch (error) {
       toast.error(error.response.data.message);
@@ -109,6 +127,8 @@ const MyApplications = () => {
                   key={element._id}
                   deleteApplication={deleteApplication}
                   openModal={openModal}
+                  GetTest={GetTest}
+                  jobId={element.jobId}
                 />
               );
             })
@@ -144,7 +164,7 @@ const MyApplications = () => {
 
 export default MyApplications;
 
-const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
+const JobSeekerCard = ({ element, deleteApplication, openModal,GetTest }) => {
   return (
     <>
       <div className="job_seeker_card">
@@ -173,6 +193,13 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
           />
         </div>
         <div className="btn_area">
+          
+        <button onClick={() => GetTest(element.jobId,element._id)}>
+            Test
+          </button>
+        </div>
+        <div className="btn_area">
+          
           <button onClick={() => deleteApplication(element._id)}>
             Delete Application
           </button>

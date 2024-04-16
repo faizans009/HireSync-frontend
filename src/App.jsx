@@ -19,6 +19,7 @@ import MyJobs from "./components/Job/MyJobs";
 import Chat from "../src/chat/pages/Chat.jsx";
 import SetAvatar from "./chat/components/SetAvatar.jsx";
 import CreateTest from '../src/components/Test/createTest.jsx';
+import GetTest from "./components/Test/GetTest.jsx";
 
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
@@ -26,12 +27,9 @@ const App = () => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/user/getuser",
-          {
+          "http://localhost:4000/api/v1/user/getuser",{
             withCredentials: true,
-          }
-        );
-
+          });
         setUser(response.data.user);
         // localStorage.setItem(JSON.stringify("user", response.data.user));
         setIsAuthorized(true);
@@ -39,10 +37,8 @@ const App = () => {
       } catch (error) {
         setIsAuthorized(false);
       }
-    };
-    fetchUser();
+    };fetchUser();
   }, [isAuthorized]);
-
   return (
     <>
       <BrowserRouter>
@@ -60,6 +56,7 @@ const App = () => {
           <Route path="/job/post" element={<PostJob />} />
           <Route path="/job/me" element={<MyJobs />} />
           <Route path="/createTest" element={<CreateTest />} />
+          <Route path="/getTest" element={<GetTest />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {/* <Footer /> */}
@@ -68,5 +65,4 @@ const App = () => {
     </>
   );
 };
-
 export default App;

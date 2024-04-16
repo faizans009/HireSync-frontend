@@ -1423,3 +1423,51 @@ textarea, input[type="text"], input[type="radio"] {
   background-color: #0056b3;
 }
 
+/* get test */
+/* GetTest.css */
+.test-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.question-container {
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .test-container {
+    padding: 10px;
+  }
+
+  .question-container {
+    margin-bottom: 10px;
+  }
+
+  button {
+    padding: 8px 16px;
+  }
+}
+.error-message {
+  color: red;
+  font-size: 0.8em;}
