@@ -36,13 +36,13 @@ export default function Contacts({ contacts, changeChat }) {
                   }`}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
-                  <div className="avatar">
+                  {/* <div className="avatar">
                     <img
                       // src={`data:image/svg+xml;base64,${contact.avatarImage}`}
                       src="src\chat\assets\avatar.png"
                       alt=""
                     />
-                  </div>
+                  </div> */}
                   <div className="username">
                     <h4>{contact.name}</h4>
                   </div>
@@ -51,15 +51,16 @@ export default function Contacts({ contacts, changeChat }) {
             })}
           </div>
           <div className="current-user">
-            <div className="avatar">
+            {/* <div className="avatar">
               <img
                 // src={`data:image/svg+xml;base64,${currentUserImage}`}
                 src="src\chat\assets\avatar.png"
                 alt=""
               />
-            </div>
+            </div> */}
+
             <div className="username">
-              <h4>{currentUserName}</h4>
+              <h6>{currentUserName}</h6>
             </div>
           </div>
         </Container>
@@ -101,7 +102,7 @@ const Container = styled.div`
     }
     .contact {
       background-color: #ffffff34;
-      min-height: 5rem;
+      min-height: 1.5rem;
       cursor: pointer;
       width: 90%;
       border-radius: 0.2rem;
@@ -110,19 +111,20 @@ const Container = styled.div`
       gap: 1rem;
       align-items: center;
       transition: 0.5s ease-in-out;
-      .avatar {
-        img {
-          height: 3rem;
-        }
-      }
+      // .avatar {
+      //   img {
+      //     height: 3rem;
+      //   }
+      // }
       .username {
         h4 {
           color: white;
+          font-size: 1.5rem;
         }
       }
     }
     .selected {
-      background-color: #9a86f3;
+      background-color: #5a3cec;
     }
   }
 
@@ -139,7 +141,7 @@ const Container = styled.div`
       }
     }
     .username {
-      h4 {
+      h6 {
         color: white;
       }
     }

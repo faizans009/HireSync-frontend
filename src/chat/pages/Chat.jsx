@@ -8,13 +8,13 @@ import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 import { Context } from "../../main";
-
+import { useWebSocket } from "../../websocketprovider";
 export default function Chat() {
   const { User } = useContext(Context);
   // console.log(JSON.parse(User));
   // localStorage.setItem("user", JSON.stringify(User));
   const navigate = useNavigate();
-  const socket = useRef();
+  // const socket = useRef();
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -29,13 +29,34 @@ export default function Chat() {
     };
     func();
   }, []);
+
+  const { socket } = useWebSocket();
+  const { addUser } = useWebSocket();
   useEffect(() => {
-    if (currentUser) {
-      console.log("current user", currentUser);
-      socket.current = io(host);
-      socket.current.emit("add-user", currentUser._id);
+    console.log("use effect runs ");
+    if (socket) {
+      // const userData = JSON.parse(localStorage.getItem("user"));
+      console.log(socket);
+      socket.on("connect", () => {
+        console.log("Connected to server");
+        console.log(socket);
+        // const userData = JSON.parse(localStorage.getItem("user"));
+        addUser(currentUser._id);
+      });
+
+      socket.on("disconnect", () => {
+        console.log("Disconnected from server");
+      });
     }
-  }, [currentUser]);
+  }, [socket]);
+  ////////////////////////////////
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     console.log("current user", currentUser);
+  //     socket.current = io(host);
+  //     socket.current.emit("add-user", currentUser._id);
+  //   }
+  // }, [currentUser]);
 
   useEffect(() => {
     const func = async () => {
@@ -69,24 +90,24 @@ export default function Chat() {
     </>
   );
 }
-
 const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  align-items: center;
-  background-color: #ffffff;
-  .container {
-    height: 85vh;
-    width: 85vw;
-    background-color: #edeef1;
-    display: grid;
-    grid-template-columns: 25% 75%;
-    @media screen and (min-width: 720px) and (max-width: 1080px) {
-      grid-template-columns: 35% 65%;
+    height: 100vh; 
+    width: 100vw; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    background-color: #ffffff;
+
+    .container {
+      margin-top: -7rem;
+      height: 86vh; 
+      width: 100vw; 
+      background-color: #edeef1;
+      display: grid;
+      grid-template-columns: 25% 75%;
+      @media screen and (min-width: 720px) and (max-width: 1080px) {
+        grid-template-columns: 35% 65%;
+      }
     }
-  }
-`;
+  `;

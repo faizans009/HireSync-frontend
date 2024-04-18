@@ -61,9 +61,8 @@ const PostJob = () => {
       )
       .then((res) => {
         toast.success(res.data.message);
-        console.log(res.data)
-        console.log(res.data.job._id)
         localStorage.setItem("jobId", res.data.job._id)
+        console.log(res.data.job._id)
         
         navigateTo("/createTest")
       })

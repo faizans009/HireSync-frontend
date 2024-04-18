@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../../App.css'; 
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function CreateTest() {
+    const navigateTo = useNavigate();
     const [questions, setQuestions] = useState([
         {
             question: '',
@@ -52,7 +54,7 @@ function CreateTest() {
             }
         ]);
     };
-
+    
     const handleSubmit = () => {
         const job=localStorage.getItem('jobId')
         axios.post('http://localhost:4000/api/v1/test/createTest/'+job, { questions })
@@ -60,6 +62,8 @@ function CreateTest() {
             .then(response => {
                 console.log('Success:', response.data);
                 toast.success('Test created successfully');
+                navigateTo("/");
+                
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -68,13 +72,13 @@ function CreateTest() {
     };
 
     return (
-        <div className="container">
+        <div className="testContainer">
             {questions.map((q, index) => (
                 <div key={index} className="question">
-                    <label>Question:</label>
+                    <label>Question</label>
                     <textarea value={q.question} onChange={(e) => handleQuestionChange(index, e.target.value)} />
                     {q.options.map((option, optionIndex) => (
-                        <div key={optionIndex}>
+                        <div className='testOptions' key={optionIndex}>
                             <input
                                 type="radio"
                                 checked={option.isAnswer}
@@ -91,8 +95,8 @@ function CreateTest() {
                 </div>
             ))}
             <br />
-            <button onClick={addQuestion}>Add Question</button>
-            <button onClick={handleSubmit}>Submit</button>
+            <button className='testBtn' onClick={addQuestion}>Add Question</button>
+            <button className='testBtn' onClick={handleSubmit}>Submit</button>
         </div>
     );
 }

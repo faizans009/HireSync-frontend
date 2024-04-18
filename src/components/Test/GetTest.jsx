@@ -92,7 +92,7 @@ const application=localStorage.getItem('application');
       {unansweredQuestionsError && (
       <p className="error-message">Please answer all questions before submitting.</p>
     )}
-      <button onClick={handleSubmit}>Submit</button>
+      <button className='submitTest' onClick={handleSubmit}>Submit</button>
     </div>
   );
 };

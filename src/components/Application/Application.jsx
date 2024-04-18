@@ -15,7 +15,6 @@ const Application = () => {
 
   const navigateTo = useNavigate();
 
-  // Function to handle file input changes
   const handleFileChange = (event) => {
     const resume = event.target.files[0];
     setResume(resume);
@@ -103,7 +102,7 @@ const Application = () => {
             </label>
             <input
               type="file"
-              accept=".pdf, .jpg, .png"
+              accept=".pdf, .jpg, .JPEG .png"
               onChange={handleFileChange}
               style={{ width: "100%" }}
             />

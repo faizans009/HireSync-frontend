@@ -4,8 +4,11 @@ import ChatInput from "./ChatInput";
 import Logout from "./Logout";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
+import Video from "./video";
+import { useWebSocket } from "../../websocketprovider";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
-
+import Notify from "./notification";
+import App from "./notification";
 export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
@@ -25,6 +28,7 @@ export default function ChatContainer({ currentChat, socket }) {
 
   useEffect(() => {
     const getCurrentChat = async () => {
+      // App.displaymsg();
       if (currentChat) {
         await JSON.parse(localStorage.getItem("user"))._id;
       }
@@ -34,7 +38,7 @@ export default function ChatContainer({ currentChat, socket }) {
 
   const handleSendMsg = async (msg) => {
     const data = await JSON.parse(localStorage.getItem("user"));
-    socket.current.emit("send-msg", {
+    socket.emit("send-msg", {
       to: currentChat._id,
       from: data._id,
       msg,
@@ -51,8 +55,8 @@ export default function ChatContainer({ currentChat, socket }) {
   };
 
   useEffect(() => {
-    if (socket.current) {
-      socket.current.on("msg-recieve", (msg) => {
+    if (socket) {
+      socket.on("msg-recieve", (msg) => {
         setArrivalMessage({ fromSelf: false, message: msg });
       });
     }
@@ -70,16 +74,19 @@ export default function ChatContainer({ currentChat, socket }) {
     <Container>
       <div className="chat-header">
         <div className="user-details">
-          <div className="avatar">
+          {/* <div className="avatar">
             <img
               src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
               alt=""
             />
-          </div>
+          </div> */}
           <div className="username">
             <h3>{currentChat.username}</h3>
           </div>
         </div>
+        {/* <App></App> */}
+        {/* <Notify></Notify> */}
+        <Video socket={socket} currentChat={currentChat} />
         <Logout />
       </div>
       <div className="chat-messages">
@@ -116,11 +123,11 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    padding: 1rem 2rem;
     .user-details {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: .5rem;
       .avatar {
         img {
           height: 3rem;
@@ -134,10 +141,10 @@ const Container = styled.div`
     }
   }
   .chat-messages {
-    padding: 1rem 2rem;
+    padding: 1rem 3rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: .1rem;
     overflow: auto;
     &::-webkit-scrollbar {
       width: 0.2rem;
@@ -153,10 +160,10 @@ const Container = styled.div`
       .content {
         max-width: 40%;
         overflow-wrap: break-word;
-        padding: 1rem;
+        padding: .1rem .5rem;
         font-size: 1.1rem;
-        border-radius: 1rem;
-        color: #d1d1d1;
+        border-radius: .5rem;
+        color: #ffffff;
         @media screen and (min-width: 720px) and (max-width: 1080px) {
           max-width: 70%;
         }
@@ -165,14 +172,16 @@ const Container = styled.div`
     .sended {
       justify-content: flex-end;
       .content {
-        background-color: #4f04ff21;
+        background-color: #510dce;
       }
     }
     .recieved {
       justify-content: flex-start;
       .content {
-        background-color: #9900ff20;
+        background-color: #9b52fe;
       }
     }
   }
 `;
+
+

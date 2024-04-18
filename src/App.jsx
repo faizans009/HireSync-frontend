@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import  { useContext, useEffect } from "react";
 import "./App.css";
 import { Context } from "./main";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -18,18 +18,21 @@ import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
 import Chat from "../src/chat/pages/Chat.jsx";
 import SetAvatar from "./chat/components/SetAvatar.jsx";
-import CreateTest from '../src/components/Test/createTest.jsx';
+import Room from "./chat/Room/Room.jsx";
+import CreateTest from "./components/Test/CreateTest.jsx";
 import GetTest from "./components/Test/GetTest.jsx";
-
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/user/getuser",{
+          "http://localhost:4000/api/v1/user/getuser",
+          {
             withCredentials: true,
-          });
+          }
+        );
+
         setUser(response.data.user);
         // localStorage.setItem(JSON.stringify("user", response.data.user));
         setIsAuthorized(true);
@@ -37,8 +40,10 @@ const App = () => {
       } catch (error) {
         setIsAuthorized(false);
       }
-    };fetchUser();
+    };
+    fetchUser();
   }, [isAuthorized]);
+
   return (
     <>
       <BrowserRouter>
@@ -46,6 +51,7 @@ const App = () => {
         <Routes>
           <Route path="/setAvatar" element={<SetAvatar />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="room/:roomid" element={<Room />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
@@ -65,4 +71,5 @@ const App = () => {
     </>
   );
 };
+
 export default App;

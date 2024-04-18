@@ -122,8 +122,9 @@ const Container = styled.div`
       }
     }
     button {
-      padding: 0.3rem 2rem;
-      border-radius: 2rem;
+      // margin-right: 1rem;
+      padding: 0.3rem 1rem;
+      border-radius: 5rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -142,3 +143,4 @@ const Container = styled.div`
     }
   }
 `;
+

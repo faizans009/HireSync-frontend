@@ -1349,55 +1349,31 @@ nav .hamburger {
     z-index: 11;
   }
 }
+/* create test */
 
-
-/* css for test portal */
-/* App.css */
-
-.container {
+.test-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.test-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem; 
 }
 
 .question {
   margin-bottom: 20px;
+  border-bottom: 1px solid #ddd; 
+  padding-bottom: 10px; 
 }
 
-textarea, input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-input[type="checkbox"] {
-  margin-right: 5px;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-/* App.css */
-
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.question {
-  margin-bottom: 20px;
+.question label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .option {
@@ -1406,11 +1382,76 @@ button:hover {
   margin-bottom: 10px;
 }
 
-textarea, input[type="text"], input[type="radio"] {
+.option input[type="checkbox"] {
   margin-right: 10px;
+  cursor: pointer; 
 }
 
-.button {
+.option label {
+  cursor: pointer; 
+}
+.testOptions{
+  display: flex;
+  margin: 1rem;
+}
+textarea,
+input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px; 
+}
+
+.test-btn {
+  margin: 0.5rem;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out; 
+}
+
+.test-btn:hover {
+  background-color: #0056b3;
+}
+
+
+/* get test */
+
+.testContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.question {
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.questionTextarea {
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 20px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.optionInput {
+  flex: 1;
+  margin-left: 10px;
+  padding: 5px;
+}
+
+.testBtn {
+  margin: 10px;
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
@@ -1419,12 +1460,13 @@ textarea, input[type="text"], input[type="radio"] {
   cursor: pointer;
 }
 
-.button:hover {
+.testBtn:hover {
   background-color: #0056b3;
 }
 
 /* get test */
-/* GetTest.css */
+
+
 .test-container {
   max-width: 800px;
   margin: 0 auto;
@@ -1434,8 +1476,12 @@ textarea, input[type="text"], input[type="radio"] {
 .question-container {
   margin-bottom: 20px;
 }
+.question-container h5 {
+  font-size: 1.2rem;
+  margin-bottom: 10px; 
+}
 
-ul {
+.test-container ul {
   list-style-type: none;
   padding: 0;
 }
@@ -1444,7 +1490,7 @@ input[type="radio"] {
   margin-right: 10px;
 }
 
-button {
+.submitTest {
   display: block;
   margin: 20px auto;
   padding: 10px 20px;
@@ -1471,3 +1517,4 @@ button {
 .error-message {
   color: red;
   font-size: 0.8em;}
+

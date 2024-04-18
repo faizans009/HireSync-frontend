@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-
+import { WebSocketProvider } from "./websocketprovider";
 export const Context = createContext({
   isAuthorized: false,
 });
@@ -11,16 +11,18 @@ const AppWrapper = () => {
   const [user, setUser] = useState({});
 
   return (
-    <Context.Provider
-      value={{
-        isAuthorized,
-        setIsAuthorized,
-        user,
-        setUser,
-      }}
-    >
-      <App />
-    </Context.Provider>
+    <WebSocketProvider>
+      <Context.Provider
+        value={{
+          isAuthorized,
+          setIsAuthorized,
+          user,
+          setUser,
+        }}
+      >
+        <App />
+      </Context.Provider>
+    </WebSocketProvider>
   );
 };
 
