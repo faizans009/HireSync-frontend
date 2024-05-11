@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import '../../App.css'; 
 import { useNavigate } from "react-router-dom";
+import Navbar from '../Layout/Navbar';
 const GetTest = () => {
   const [testData, setTestData] = useState([]);
   const [answers, setAnswers] = useState({});
@@ -67,6 +68,9 @@ const application=localStorage.getItem('application');
   };
 
   return (
+    <div>
+      <Navbar />
+    
     <div className="test-container">
       {testData.map(question => (
         <div key={question._id} className="question-container">
@@ -93,6 +97,7 @@ const application=localStorage.getItem('application');
       <p className="error-message">Please answer all questions before submitting.</p>
     )}
       <button className='submitTest' onClick={handleSubmit}>Submit</button>
+    </div>
     </div>
   );
 };

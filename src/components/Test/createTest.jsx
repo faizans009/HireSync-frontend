@@ -5,6 +5,7 @@ import axios from 'axios';
 import '../../App.css'; 
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../Layout/Navbar';
 
 function CreateTest() {
     const navigateTo = useNavigate();
@@ -72,6 +73,9 @@ function CreateTest() {
     };
 
     return (
+        <div>
+            <Navbar />
+        
         <div className="testContainer">
             {questions.map((q, index) => (
                 <div key={index} className="question">
@@ -97,6 +101,7 @@ function CreateTest() {
             <br />
             <button className='testBtn' onClick={addQuestion}>Add Question</button>
             <button className='testBtn' onClick={handleSubmit}>Submit</button>
+        </div>
         </div>
     );
 }

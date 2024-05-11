@@ -5,6 +5,7 @@ import { FaCheck } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import { Context } from "../../main";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Layout/Navbar";
 
 const MyJobs = () => {
   const [myJobs, setMyJobs] = useState([]);
@@ -85,6 +86,7 @@ const MyJobs = () => {
 
   return (
     <>
+    <Navbar />
       <div className="myJobs page">
         <div className="container">
           <h1>Your Posted Jobs</h1>

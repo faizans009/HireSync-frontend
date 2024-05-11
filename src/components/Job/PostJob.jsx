@@ -3,6 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+import Navbar from "../Layout/Navbar";
 const PostJob = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -78,6 +79,7 @@ const PostJob = () => {
 
   return (
     <>
+    <Navbar />
       <div className="job_post page">
         <div className="container">
           <h3>POST NEW JOB</h3>

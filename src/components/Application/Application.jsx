@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../../main";
+import Navbar from "../Layout/Navbar";
 const Application = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,10 +16,30 @@ const Application = () => {
 
   const navigateTo = useNavigate();
 
-  const handleFileChange = (event) => {
-    const resume = event.target.files[0];
-    setResume(resume);
-  };
+  const FileUpload = () => {
+    const [file, setFile] = useState(null);
+  
+    const handleFileChange = (event) => {
+      setFile(event.target.files[0]);
+    };
+  
+    const handleFileUpload = async () => {
+      const formData = new FormData();
+      formData.append('resume', file);
+  
+      try {
+        const response = await axios.post('http://localhost:4000/api/v1/application/post', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        console.log(response.data);
+        // Handle success
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        // Handle error
+      }
+    };
 
   const { id } = useParams();
   const handleApplication = async (e) => {
@@ -33,6 +54,7 @@ const Application = () => {
     formData.append("jobId", id);
 
     try {
+      console.log(formData)
       const { data } = await axios.post(
         "http://localhost:4000/api/v1/application/post",
         formData,
@@ -61,6 +83,9 @@ const Application = () => {
   }
 
   return (
+    <div>
+      <Navbar />
+   
     <section className="application">
       <div className="container">
         <h3>Application Form</h3>
@@ -103,7 +128,7 @@ const Application = () => {
             <input
               type="file"
               accept=".pdf, .jpg, .JPEG .png"
-              onChange={handleFileChange}
+              onChange={handleFileUpload}
               style={{ width: "100%" }}
             />
           </div>
@@ -111,6 +136,7 @@ const Application = () => {
         </form>
       </div>
     </section>
+    </div>
   );
 };
 

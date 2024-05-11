@@ -229,6 +229,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import ResumeModal from "./ResumeModal";
 import { sendMessageRoute } from "../../chat/utils/APIRoutes";
+import Navbar from "../Layout/Navbar";
 
 const MyApplications = () => {
   const { user } = useContext(Context);
@@ -332,6 +333,9 @@ const MyApplications = () => {
   };
 
   return (
+    <>
+    <Navbar />
+    
     <section className="my_applications page">
       {user && user.role === "Job Seeker" ? (
         <div className="container">
@@ -381,6 +385,7 @@ const MyApplications = () => {
         <ResumeModal imageUrl={resumeImageUrl} onClose={closeModal} />
       )}
     </section>
+    </>
   );
 };
 
@@ -389,6 +394,7 @@ export default MyApplications;
 const JobSeekerCard = ({ element, deleteApplication, openModal,GetTest }) => {
   return (
     <>
+     {/* <Navbar /> */}
       <div className="job_seeker_card">
         <div className="detail">
           <p>
@@ -434,6 +440,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal,GetTest }) => {
 const EmployerCard = ({ element, openModal, messageApplication }) => {
   return (
     <>
+     {/* <Navbar /> */}
       <div className="job_seeker_card">
         <div className="detail">
           <p>

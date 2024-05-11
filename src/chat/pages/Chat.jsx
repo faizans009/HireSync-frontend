@@ -9,6 +9,7 @@ import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 import { Context } from "../../main";
 import { useWebSocket } from "../../websocketprovider";
+import Navbar from "../../components/Layout/Navbar";
 export default function Chat() {
   const { User } = useContext(Context);
   // console.log(JSON.parse(User));
@@ -77,6 +78,7 @@ export default function Chat() {
   };
   return (
     <>
+     <Navbar />
       <Container>
         <div className="container">
           <Contacts contacts={contacts} changeChat={handleChatChange} />

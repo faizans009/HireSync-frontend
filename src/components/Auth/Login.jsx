@@ -1,8 +1,11 @@
-import { useContext, useState } from "react";
+
 import { MdOutlineMailOutline } from "react-icons/md";
 import { RiLock2Fill } from "react-icons/ri";
-import { Link, Navigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
+
+
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
@@ -11,8 +14,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-
-  const { isAuthorized, setIsAuthorized } = useContext(Context);
+  const { setIsAuthorized } = useContext(Context);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,30 +30,29 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log(data);
-      // localStorage.setItem(JSON.stringify("user", data));
       localStorage.setItem("user", JSON.stringify(data.user));
       toast.success(data.message);
       setEmail("");
       setPassword("");
       setRole("");
       setIsAuthorized(true);
+      
+      if (data.user.role === "Admin") {
+        navigate("/admin"); // Navigate to /admin
+      } else {
+        navigate("/"); // Navigate to /
+      }
     } catch (error) {
       console.log(error);
-      toast.error(error);
+      toast.error(error.message);
     }
   };
-
-  if (isAuthorized) {
-    return <Navigate to={"/"} />;
-  }
 
   return (
     <>
       <section className="authPage">
         <div className="container">
           <div className="header">
-            {/* <img src="/JobZeelogo.png" alt="logo" /> */}
             <h3>Login to your account</h3>
           </div>
           <form>
@@ -61,6 +63,7 @@ const Login = () => {
                   <option value="">Select Role</option>
                   <option value="Employer">Employer</option>
                   <option value="Job Seeker">Job Seeker</option>
+                  <option value="Admin">Admin</option>
                 </select>
                 <FaRegUser />
               </div>

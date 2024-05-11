@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+import Navbar from "../Layout/Navbar";
 const JobDetails = () => {
   const { id } = useParams();
   const [job, setJob] = useState({});
@@ -28,6 +29,8 @@ const JobDetails = () => {
   }
 
   return (
+    <>
+     <Navbar />
     <section className="jobDetail page">
       <div className="container">
         <h3>Job Details</h3>
@@ -71,6 +74,7 @@ const JobDetails = () => {
         </div>
       </div>
     </section>
+          </>
   );
 };
 

@@ -9,6 +9,7 @@ import { useWebSocket } from "../../websocketprovider";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
 import Notify from "./notification";
 import App from "./notification";
+import Navbar from "../../components/Layout/Navbar";
 export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
@@ -71,6 +72,8 @@ export default function ChatContainer({ currentChat, socket }) {
   }, [messages]);
 
   return (
+    
+   
     <Container>
       <div className="chat-header">
         <div className="user-details">

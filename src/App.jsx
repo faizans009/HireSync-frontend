@@ -21,6 +21,10 @@ import SetAvatar from "./chat/components/SetAvatar.jsx";
 import Room from "./chat/Room/Room.jsx";
 import CreateTest from "./components/Test/CreateTest.jsx";
 import GetTest from "./components/Test/GetTest.jsx";
+import Admin from "./Admin/Admin.jsx";
+import Users from "./Admin/Users.jsx";
+import Applications from "./Admin/Applications.jsx";
+import AdminJobs from "./Admin/AdminJobs.jsx";
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
   useEffect(() => {
@@ -47,7 +51,7 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route path="/setAvatar" element={<SetAvatar />} />
           <Route path="/chat" element={<Chat />} />
@@ -63,7 +67,11 @@ const App = () => {
           <Route path="/job/me" element={<MyJobs />} />
           <Route path="/createTest" element={<CreateTest />} />
           <Route path="/getTest" element={<GetTest />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/admin/users" element={<Users />} />
+          <Route path="/admin/jobs" element={<AdminJobs />} />
+          <Route path="/admin/applications" element={<Applications />} />
         </Routes>
         {/* <Footer /> */}
         <Toaster />
