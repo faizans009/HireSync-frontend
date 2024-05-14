@@ -182,8 +182,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../../main";
 import Navbar from "../Layout/Navbar";
 
+
 const FileUpload = () => {
   const [file, setFile] = useState(null);
+  const [resume,setResume]=useState()
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -205,10 +207,13 @@ const FileUpload = () => {
         },
       });
       console.log(response.data);
-      // Handle success
+      setResume(response.data.url)
+
+      alert('File uploaded successfully');
+      setFile(null); 
     } catch (error) {
       console.error('Error uploading file:', error);
-      // Handle error
+      alert('Failed to upload file');
     }
   };
 
@@ -219,13 +224,15 @@ const FileUpload = () => {
       </label>
       <input
         type="file"
-        accept=".pdf, .jpg, .JPEG .png"
+        accept=".pdf"
         onChange={handleFileChange}
         style={{ width: "100%" }}
       />
+      <button onClick={handleFileUpload}>Upload</button>
     </div>
   );
 };
+
 
 const Application = () => {
   const [name, setName] = useState("");
@@ -246,7 +253,7 @@ const Application = () => {
     formData.append("phone", phone);
     formData.append("address", address);
     formData.append("coverLetter", coverLetter);
-    formData.append("resume", file);
+    formData.append("resume", resume);
     formData.append("jobId", id);
 
     try {

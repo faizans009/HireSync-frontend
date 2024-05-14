@@ -25,6 +25,9 @@ import Admin from "./Admin/Admin.jsx";
 import Users from "./Admin/Users.jsx";
 import Applications from "./Admin/Applications.jsx";
 import AdminJobs from "./Admin/AdminJobs.jsx";
+import AdminLogin from "./components/Auth/AdminLogin.jsx";
+import ForgetPassword from "./components/Auth/ForgetPassword.jsx";
+import ResetPassword from "./components/Auth/ResetPassword.jsx";
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
   useEffect(() => {
@@ -57,7 +60,10 @@ const App = () => {
           <Route path="/chat" element={<Chat />} />
           <Route path="room/:roomid" element={<Room />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgetPassword" element={<ForgetPassword />} />
+          <Route path="/password/reset/:token" element={<ResetPassword />} />
           <Route path="/" element={<Home />} />
           <Route path="/job/getall" element={<Jobs />} />
           <Route path="/job/:id" element={<JobDetails />} />

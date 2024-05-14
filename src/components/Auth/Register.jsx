@@ -10,16 +10,62 @@ import toast from "react-hot-toast";
 import { Context } from "../../main";
 
 const Register = () => {
+  // const [email, setEmail] = useState("");
+  // const [name, setName] = useState("");
+  // const [phone, setPhone] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [errors, setErrors] = useState({});
 
   const { isAuthorized, setIsAuthorized } = useContext(Context);
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  const validatePhone = (phone) => {
+    const re = /^[0-9]{11}$/;
+    return re.test(String(phone));
+  };
+
+
   const handleRegister = async (e) => {
     e.preventDefault();
+
+
+    const newErrors = {};
+
+    if (!validateEmail(email)) {
+      newErrors.email = "Invalid email address";
+    }
+
+    if (!name.trim()) {
+      newErrors.name = "Name is required";
+    }
+
+    if (!validatePhone(phone)) {
+      newErrors.phone = "Invalid phone number";
+    }
+
+    if (password.length < 8) {
+      newErrors.password = "Password must be at least 6 characters long";
+    }
+
+    if (!role) {
+      newErrors.role = "Please select a role";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     try {
       const { data } = await axios.post(
         "http://localhost:4000/api/v1/user/register",
@@ -68,6 +114,7 @@ const Register = () => {
                 </select>
                 <FaRegUser />
               </div>
+              {errors.role && <p className="error">{errors.role}</p>}
             </div>
             <div className="inputTag">
               <label>Name</label>
@@ -80,6 +127,7 @@ const Register = () => {
                 />
                 <FaPencilAlt />
               </div>
+              {errors.name && <p className="error">{errors.name}</p>}
             </div>
             <div className="inputTag">
               <label>Email Address</label>
@@ -92,6 +140,7 @@ const Register = () => {
                 />
                 <MdOutlineMailOutline />
               </div>
+              {errors.email && <p className="error">{errors.email}</p>}
             </div>
             <div className="inputTag">
               <label>Phone Number</label>
@@ -104,6 +153,7 @@ const Register = () => {
                 />
                 <FaPhoneFlip />
               </div>
+              {errors.phone && <p className="error">{errors.phone}</p>}
             </div>
             <div className="inputTag">
               <label>Password</label>
@@ -116,6 +166,7 @@ const Register = () => {
                 />
                 <RiLock2Fill />
               </div>
+              {errors.password && <p className="error">{errors.password}</p>}
             </div>
             <button type="submit" onClick={handleRegister}>
               Register
@@ -132,3 +183,6 @@ const Register = () => {
 };
 
 export default Register;
+
+
+
