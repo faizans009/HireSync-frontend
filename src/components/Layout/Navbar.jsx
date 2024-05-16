@@ -173,6 +173,7 @@ const Navbar = () => {
       <div className="container">
         <div className="logo">
           {/* <img src="/JobZee-logos__white.png" alt="logo" /> */}
+          {/* <h3>HireSync</h3> */}
         </div>
         <ul className={!show ? "menu" : "show-menu menu"}>
           <li>

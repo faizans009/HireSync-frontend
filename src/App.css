@@ -780,93 +780,6 @@ p {
   flex-direction: column;
   gap: 35px;
 }
-.job_seeker_card {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid gainsboro;
-  padding: 20px 0;
-}
-.job_seeker_card .detail {
-  flex: 3;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.job_seeker_card .detail {
-  flex: 2;
-}
-.job_seeker_card .detail span {
-  font-weight: bold;
-}
-.job_seeker_card .resume {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.job_seeker_card .resume {
-  position: relative;
-  height: 250px;
-}
-.job_seeker_card .resume img {
-  width: auto;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.job_seeker_card .btn_area {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.job_seeker_card .btn_area button {
-  background: #d9534f;
-  color: #fff;
-  border: none;
-  padding: 10px 30px;
-  font-size: 20px;
-  font-weight: 500;
-}
-@media (max-width: 1520px) {
-  .my_applications .container {
-    min-width: 100%;
-  }
-}
-@media (max-width: 1150px) {
-  .job_seeker_card .detail {
-    flex: 1;
-  }
-  .job_seeker_card .resume {
-    flex: 1;
-  }
-  .job_seeker_card .btn_area {
-    flex: 1;
-  }
-}
-@media (max-width: 850px) {
-  .job_seeker_card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .job_seeker_card .detail {
-    flex: none;
-  }
-  .job_seeker_card .resume {
-    flex: none;
-    width: 320px;
-    margin: 30px 0;
-  }
-  .job_seeker_card .btn_area {
-    flex: none;
-  }
-}
-@media (max-width: 360px) {
-  .job_seeker_card,
-  .job_seeker_card .resume {
-    width: 100%;
-  }
-}
 
 .job_post {
   background: #f1f3f6;
@@ -1637,6 +1550,7 @@ tr:hover {
   color: red;
   font-size: 12px;
   margin-top: 5px;
+  display: block;
 }
 
 .authPage .container form #forget a{
@@ -1652,3 +1566,137 @@ tr:hover {
   display: flex;
   justify-content: end;
 }
+
+.adminLogout{
+  background-color: #000000;
+  color: white;
+  border: none;
+  font-size: 16px;
+  margin-top: 1rem;
+}
+
+.download-button-container {
+  margin-top: 15px;
+}
+
+.download-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #218838;
+}
+
+
+
+
+
+
+.my_applications {
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+h4 {
+  text-align: center;
+  color: #999;
+}
+
+.job_seeker_card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.job_seeker_card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.detail p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.detail p span {
+  font-weight: bold;
+  color: #333;
+}
+
+.download-button-container {
+  margin-top: 10px;
+}
+
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #0056b3;
+}
+
+.download-button svg {
+  margin-right: 5px;
+}
+
+.btn_area {
+  margin-top: 10px;
+}
+
+.btn_area button {
+  display: inline-flex;
+  align-items: center;
+  background-color: #28a745;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.btn_area button:hover {
+  background-color: #218838;
+}
+
+.btn_area button svg {
+  margin-right: 5px;
+}
+
+.btn_area .delete-button {
+  background-color: #dc3545;
+}
+
+/* .btn_area .delete-button:hover {
+  background-color: #c82333; */

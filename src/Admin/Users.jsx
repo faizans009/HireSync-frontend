@@ -55,7 +55,7 @@ const Users = () => {
               <td>{user.email}</td>
               <td>{user.role}</td>
               <td>{user.phone}</td>
-              <button onClick={() => handleDeleteUser(user._id)}><MdDelete /></button>
+              {/* <button onClick={() => handleDeleteUser(user._id)}><MdDelete /></button> */}
             </tr>
           ))}
         </tbody>

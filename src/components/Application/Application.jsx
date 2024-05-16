@@ -183,9 +183,68 @@ import { Context } from "../../main";
 import Navbar from "../Layout/Navbar";
 
 
-const FileUpload = () => {
+// const FileUpload = ({handleResume}) => {
+//   const [file, setFile] = useState(null);
+  
+//   const handleFileChange = (event) => {
+//     setFile(event.target.files[0]);
+//   };
+
+//   const handleFileUpload = async () => {
+//     if (!file) {
+//       alert('Please select a file');
+//       return;
+//     }
+
+//     const formData = new FormData();
+//     formData.append('resume', file);
+
+//     try {
+//       const response = await axios.post('http://localhost:4000/api/v1/application/saveDocumentToServer', formData, {
+//         headers: {
+//           'Content-Type': 'multipart/form-data',
+//         },
+//       });
+//       console.log(response.data);
+//       handleResume(response.data.url)
+
+//       alert('File uploaded successfully');
+//       setFile(null); 
+//     } catch (error) {
+//       console.error('Error uploading file:', error);
+//       alert('Failed to upload file');
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <label style={{ textAlign: "start", display: "block", fontSize: "20px" }}>
+//         Select Resume
+//       </label>
+//       <input
+//         type="file"
+//         accept=".pdf"
+//         onChange={handleFileChange}
+//         style={{ width: "100%" }}
+//       />
+//       <button onClick={handleFileUpload}>Upload</button>
+//     </div>
+//   );
+// };
+
+
+const Application = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [coverLetter, setCoverLetter] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [resume,setResume]=useState("")
   const [file, setFile] = useState(null);
-  const [resume,setResume]=useState()
+
+  const { isAuthorized, user } = useContext(Context);
+  const navigateTo = useNavigate();
+  const { jobId } = useParams();
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -209,41 +268,13 @@ const FileUpload = () => {
       console.log(response.data);
       setResume(response.data.url)
 
-      alert('File uploaded successfully');
+      
       setFile(null); 
     } catch (error) {
       console.error('Error uploading file:', error);
       alert('Failed to upload file');
     }
   };
-
-  return (
-    <div>
-      <label style={{ textAlign: "start", display: "block", fontSize: "20px" }}>
-        Select Resume
-      </label>
-      <input
-        type="file"
-        accept=".pdf"
-        onChange={handleFileChange}
-        style={{ width: "100%" }}
-      />
-      <button onClick={handleFileUpload}>Upload</button>
-    </div>
-  );
-};
-
-
-const Application = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [coverLetter, setCoverLetter] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-
-  const { isAuthorized, user } = useContext(Context);
-  const navigateTo = useNavigate();
-  const { id } = useParams();
 
   const handleApplication = async (e) => {
     e.preventDefault();
@@ -254,7 +285,7 @@ const Application = () => {
     formData.append("address", address);
     formData.append("coverLetter", coverLetter);
     formData.append("resume", resume);
-    formData.append("jobId", id);
+    formData.append("jobId", jobId);
 
     try {
       const { data } = await axios.post(
@@ -263,10 +294,11 @@ const Application = () => {
         {
           withCredentials: true,
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
+      
       setName("");
       setEmail("");
       setCoverLetter("");
@@ -320,7 +352,19 @@ const Application = () => {
               value={coverLetter}
               onChange={(e) => setCoverLetter(e.target.value)}
             />
-            <FileUpload />
+            <div>
+      <label style={{ textAlign: "start", display: "block", fontSize: "20px" }}>
+        Select Resume
+      </label>
+      <input
+        type="file"
+        accept=".pdf"
+        onChange={handleFileChange}
+        style={{ width: "100%" }}
+      />
+      <button onClick={handleFileUpload}>Upload</button>
+    </div>
+            {/* <FileUpload handleResume={handleResume}/> */}
             <button type="submit">Send Application</button>
           </form>
         </div>

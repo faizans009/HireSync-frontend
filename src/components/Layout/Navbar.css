@@ -16,7 +16,7 @@
   list-style: none;
   margin: 0;
   outline: none;
-  padding: 10px 16px;
+  padding: 5px 16px;
   position: relative;
   text-align: center;
   text-decoration: none;
@@ -65,3 +65,4 @@
 .button-1:focus {
   background-color: #f082ac;
 }
+
